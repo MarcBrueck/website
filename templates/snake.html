@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="home">
+   
+    <h2 >Snake</h2> 
+    <p style="text-align:center;">A little game. You can start to play using W,A,S,D</p> 
+   
+
+    <p style="text-align:center;" id="p1">Have fun</p>
+    
+    <!-- Menu Navigation Bar -->
+    <script>
+    function Reload() {
+     location.reload();
+ 	}
+    </script>
+
+    </div>
+<div id='portfolio' height=500px;>
+	
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/p5.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/p5.dom.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/snake3.js') }}"></script>
+  </div>
+
+
+<div class="center" ; top=20%; style="text-align:center;">
+	<button class="button" onclick="Reload()">New game</button>
+</div>
+{% endblock %}

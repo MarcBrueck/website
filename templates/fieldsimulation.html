@@ -1,0 +1,585 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="glowscript" class="glowscript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://s3.amazonaws.com/glowscript/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css" />
+<link type="text/css" href="https://s3.amazonaws.com/glowscript/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/package/glow.2.7.min.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/package/RSrun.2.7.min.js"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+// START JAVASCRIPT
+;(function() { var __rt=srequire('streamline/lib/callbacks/runtime').runtime(__filename, false),__func=__rt.__func,__cb=__rt.__cb; var RS_modules = {};
+RS_modules.pythonize = {};
+(function() {
+  function strings() {
+    var string_funcs, exclude, name;
+    string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+    if (!arguments.length) {
+      exclude = (function() {
+        var s = RS_set();
+        s.jsset.add("split");
+        s.jsset.add("replace");
+        return s;
+      })(); }
+     else if (arguments[0]) {
+      exclude = Array.prototype.slice.call(arguments); }
+     else {
+      exclude = null; }  ;
+    if (exclude) {
+      string_funcs = string_funcs.difference(set(exclude)); } ;
+    var RS_Iter0 = RS_Iterable(string_funcs);
+    for (var RS_Index0 = 0; RS_Index0["<"](RS_Iter0.length); RS_Index0++) {
+      name = RS_Iter0[RS_Index0];
+      (RS_expr_temp = String.prototype)[((((typeof name === "number") && name["<"](0))) ? RS_expr_temp.length["+"](name) : name)] = (RS_expr_temp = RS_str.prototype)[((((typeof name === "number") && name["<"](0))) ? RS_expr_temp.length["+"](name) : name)]; }; };  RS_modules.pythonize.strings = strings;
+})();
+function main(_) { var version, box, sphere, simple_sphere, cylinder, pyramid, cone, helix, ellipsoid, ring, arrow, compound, display, vector, print, type, scene, RS_ls, deltat, slide_time, time_text, slide_Efield, E_text, slide_Bfield, B_text, m1, T, grid, B_arrows, E_arrows, Efield, Bfield, Efieldcoord, Bfieldcoord, Estrength, counter, balu, __name__, strings, __this = this;
+  function coordinates() {
+    var RS_ls, middle, leng, pointer;
+    "22";
+    middle = vec(60["-u"](), 50, 0);
+    "23";
+    leng = 20;
+    "24";
+    RS_interpolate_kwargs.call(this, label, [RS_desugar_kwargs({ pos: middle["+"](vec(leng["+"](2), 0, 0)), text: "X-axis", color: color.white, box: 0 }),]);
+    "25";
+    pointer = RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({ pos: middle, shaftwidth: 1, headwidth: 2, axis: vec(leng, 0, 0), color: color.yellow }),]);
+    "27";
+    RS_interpolate_kwargs.call(this, label, [RS_desugar_kwargs({ pos: middle["+"](vec(0, leng["+"](2), 0)), text: "Y-axis", color: color.white, box: 0 }),]);
+    "28";
+    pointer = RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({ pos: middle, shaftwidth: 1, headwidth: 2, axis: vec(0, leng, 0), color: color.yellow }),]);
+    "30";
+    RS_interpolate_kwargs.call(this, label, [RS_desugar_kwargs({ pos: middle["+"](vec(0, 0, leng["+"](2))), text: "Z-axis", color: color.white, box: 0 }),]);
+    "31";
+    pointer = RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({ pos: middle, shaftwidth: 1, headwidth: 2, axis: vec(0, 0, leng), color: color.yellow }),]); };  function creategrids() {
+    var start = ((((((0 === arguments.length["-"](1)) && (arguments[arguments.length["-"](1)] !== null)) && (typeof arguments[arguments.length["-"](1)] === "object")) && (arguments[arguments.length["-"](1)][RS_kwargs_symbol] === true))) ? undefined : arguments[0]);
+    var stepsize = ((((((1 === arguments.length["-"](1)) && (arguments[arguments.length["-"](1)] !== null)) && (typeof arguments[arguments.length["-"](1)] === "object")) && (arguments[arguments.length["-"](1)][RS_kwargs_symbol] === true))) ? undefined : arguments[1]);
+    var height = ((((((2 === arguments.length["-"](1)) && (arguments[arguments.length["-"](1)] !== null)) && (typeof arguments[arguments.length["-"](1)] === "object")) && (arguments[arguments.length["-"](1)][RS_kwargs_symbol] === true))) ? undefined : arguments[2]);
+    var plane = ((((((3 === arguments.length["-"](1)) && (arguments[arguments.length["-"](1)] !== null)) && (typeof arguments[arguments.length["-"](1)] === "object")) && (arguments[arguments.length["-"](1)][RS_kwargs_symbol] === true))) ? undefined : arguments[3]);
+    var translation = ((((arguments[4] === undefined) || (((((4 === arguments.length["-"](1)) && (arguments[arguments.length["-"](1)] !== null)) && (typeof arguments[arguments.length["-"](1)] === "object")) && (arguments[arguments.length["-"](1)][RS_kwargs_symbol] === true))))) ? creategrids.__defaults__.translation : arguments[4]);
+    var RS_kwargs_obj = arguments[arguments.length["-"](1)];
+    if ((((RS_kwargs_obj === null) || (typeof RS_kwargs_obj !== "object")) || (RS_kwargs_obj[RS_kwargs_symbol] !== true))) { RS_kwargs_obj = { }; };
+    if (Object.prototype.hasOwnProperty.call(RS_kwargs_obj, "translation")) {
+      translation = RS_kwargs_obj.translation; } ;
+    var RS_ls, x, z, counter1, y, counter2;
+    "34";
+    if (((((plane === "-y_direction") || ((typeof plane === "object") && RS_equals(plane, "-y_direction")))) || "y_direction")) {
+      "35";
+      var RS_Iter1 = RS_Iterable(RS_list_decorate([1,1["-u"](),]));
+      for (var RS_Index1 = 0; RS_Index1["<"](RS_Iter1.length); RS_Index1++) {
+        counter1 = RS_Iter1[RS_Index1];
+        "36";
+        height = height["*"](counter1);
+        "37";
+        var RS_Iter2 = RS_Iterable(range(start["-u"]()["+"](translation.x), start["+"](stepsize)["+"](translation.x), stepsize));
+        for (var RS_Index2 = 0; RS_Index2["<"](RS_Iter2.length); RS_Index2++) {
+          x = RS_Iter2[RS_Index2];
+          "38";
+          grid.append(RS_interpolate_kwargs.call(this, curve, [RS_desugar_kwargs({ pos: RS_list_decorate([vec(x, height["+"](translation.y), start["-u"]()["+"](translation.z)),vec(x, height["+"](translation.y), start["+"](translation.z)),]), color: vec(0.7, 0.7, 0.7) }),])); };
+        "39";
+        var RS_Iter3 = RS_Iterable(range(start["-u"]()["+"](translation.z), start["+"](stepsize)["+"](translation.z), stepsize));
+        for (var RS_Index3 = 0; RS_Index3["<"](RS_Iter3.length); RS_Index3++) {
+          z = RS_Iter3[RS_Index3];
+          "40";
+          grid.append(RS_interpolate_kwargs.call(this, curve, [RS_desugar_kwargs({ pos: RS_list_decorate([vec(start["-u"]()["+"](translation.x), height["+"](translation.y), z),vec(start["+"](translation.x), height["+"](translation.y), z),]), color: vec(0.7, 0.7, 0.7) }),])); }; }; } ;    "42";
+    if (((((plane === "-x_direction") || ((typeof plane === "object") && RS_equals(plane, "-x_direction")))) || "x_direction")) {
+      "43";
+      var RS_Iter4 = RS_Iterable(RS_list_decorate([1,1["-u"](),]));
+      for (var RS_Index4 = 0; RS_Index4["<"](RS_Iter4.length); RS_Index4++) {
+        counter2 = RS_Iter4[RS_Index4];
+        "44";
+        height = height["*"](counter2);
+        "45";
+        var RS_Iter5 = RS_Iterable(range(start["-u"]()["+"](translation.y), start["+"](stepsize)["+"](translation.y), stepsize));
+        for (var RS_Index5 = 0; RS_Index5["<"](RS_Iter5.length); RS_Index5++) {
+          y = RS_Iter5[RS_Index5];
+          "46";
+          grid.append(RS_interpolate_kwargs.call(this, curve, [RS_desugar_kwargs({ pos: RS_list_decorate([vec(height["+"](translation.x), y, start["-u"]()["+"](translation.z)),vec(height["+"](translation.x), y, start["+"](translation.z)),]), color: vec(0.7, 0.7, 0.7) }),])); };
+        "47";
+        var RS_Iter6 = RS_Iterable(range(start["-u"]()["+"](translation.z), start["+"](stepsize)["+"](translation.z), stepsize));
+        for (var RS_Index6 = 0; RS_Index6["<"](RS_Iter6.length); RS_Index6++) {
+          z = RS_Iter6[RS_Index6];
+          "48";
+          grid.append(RS_interpolate_kwargs.call(this, curve, [RS_desugar_kwargs({ pos: RS_list_decorate([vec(height["+"](translation.x), start["-u"]()["+"](translation.y), z),vec(height["+"](translation.x), start["+"](translation.y), z),]), color: vec(0.7, 0.7, 0.7) }),])); }; }; } ;    "50";
+    if (((((plane === "-z_direction") || ((typeof plane === "object") && RS_equals(plane, "-z_direction")))) || "z_direction")) {
+      "51";
+      var RS_Iter7 = RS_Iterable(RS_list_decorate([1,1["-u"](),]));
+      for (var RS_Index7 = 0; RS_Index7["<"](RS_Iter7.length); RS_Index7++) {
+        counter2 = RS_Iter7[RS_Index7];
+        "52";
+        height = height["*"](counter2);
+        "53";
+        var RS_Iter8 = RS_Iterable(range(start["-u"]()["+"](translation.x), start["+"](stepsize)["+"](translation.x), stepsize));
+        for (var RS_Index8 = 0; RS_Index8["<"](RS_Iter8.length); RS_Index8++) {
+          x = RS_Iter8[RS_Index8];
+          "54";
+          grid.append(RS_interpolate_kwargs.call(this, curve, [RS_desugar_kwargs({ pos: RS_list_decorate([vec(x, start["-u"]()["+"](translation.y), height["+"](translation.z)),vec(x, start["+"](translation.y), height["+"](translation.z)),]), color: vec(0.7, 0.7, 0.7) }),])); };
+        "55";
+        var RS_Iter9 = RS_Iterable(range(start["-u"]()["+"](translation.y), start["+"](stepsize)["+"](translation.y), stepsize));
+        for (var RS_Index9 = 0; RS_Index9["<"](RS_Iter9.length); RS_Index9++) {
+          y = RS_Iter9[RS_Index9];
+          "56";
+          grid.append(RS_interpolate_kwargs.call(this, curve, [RS_desugar_kwargs({ pos: RS_list_decorate([vec(start["-u"]()["+"](translation.x), y, height["+"](translation.z)),vec(start["+"](translation.x), y, height["+"](translation.z)),]), color: vec(0.7, 0.7, 0.7) }),])); }; }; } ; };  function B_Field_arrows() {
+    var start = ((((((0 === arguments.length["-"](1)) && (arguments[arguments.length["-"](1)] !== null)) && (typeof arguments[arguments.length["-"](1)] === "object")) && (arguments[arguments.length["-"](1)][RS_kwargs_symbol] === true))) ? undefined : arguments[0]);
+    var stepsize = ((((((1 === arguments.length["-"](1)) && (arguments[arguments.length["-"](1)] !== null)) && (typeof arguments[arguments.length["-"](1)] === "object")) && (arguments[arguments.length["-"](1)][RS_kwargs_symbol] === true))) ? undefined : arguments[1]);
+    var height = ((((((2 === arguments.length["-"](1)) && (arguments[arguments.length["-"](1)] !== null)) && (typeof arguments[arguments.length["-"](1)] === "object")) && (arguments[arguments.length["-"](1)][RS_kwargs_symbol] === true))) ? undefined : arguments[2]);
+    var plane = ((((((3 === arguments.length["-"](1)) && (arguments[arguments.length["-"](1)] !== null)) && (typeof arguments[arguments.length["-"](1)] === "object")) && (arguments[arguments.length["-"](1)][RS_kwargs_symbol] === true))) ? undefined : arguments[3]);
+    var colour = ((((((4 === arguments.length["-"](1)) && (arguments[arguments.length["-"](1)] !== null)) && (typeof arguments[arguments.length["-"](1)] === "object")) && (arguments[arguments.length["-"](1)][RS_kwargs_symbol] === true))) ? undefined : arguments[4]);
+    var translation = ((((arguments[5] === undefined) || (((((5 === arguments.length["-"](1)) && (arguments[arguments.length["-"](1)] !== null)) && (typeof arguments[arguments.length["-"](1)] === "object")) && (arguments[arguments.length["-"](1)][RS_kwargs_symbol] === true))))) ? B_Field_arrows.__defaults__.translation : arguments[5]);
+    var RS_kwargs_obj = arguments[arguments.length["-"](1)];
+    if ((((RS_kwargs_obj === null) || (typeof RS_kwargs_obj !== "object")) || (RS_kwargs_obj[RS_kwargs_symbol] !== true))) { RS_kwargs_obj = { }; };
+    if (Object.prototype.hasOwnProperty.call(RS_kwargs_obj, "translation")) {
+      translation = RS_kwargs_obj.translation; } ;
+    var RS_ls, pfeilsteps, point2, point1;
+    "59";
+    var RS_Iter10 = RS_Iterable(range(start["-u"](), start["+"](stepsize), stepsize));
+    for (var RS_Index10 = 0; RS_Index10["<"](RS_Iter10.length); RS_Index10++) {
+      point1 = RS_Iter10[RS_Index10];
+      "60";
+      var RS_Iter11 = RS_Iterable(range(start["-u"](), start["+"](stepsize), stepsize));
+      for (var RS_Index11 = 0; RS_Index11["<"](RS_Iter11.length); RS_Index11++) {
+        point2 = RS_Iter11[RS_Index11];
+        "61";
+        var RS_Iter12 = RS_Iterable(range(height["-"](stepsize)["-u"](), height["+"](stepsize), stepsize));
+        for (var RS_Index12 = 0; RS_Index12["<"](RS_Iter12.length); RS_Index12++) {
+          pfeilsteps = RS_Iter12[RS_Index12];
+          "62";
+          if ((((plane === "-y_direction") || ((typeof plane === "object") && RS_equals(plane, "-y_direction"))))) {
+            "63";
+            B_arrows.append(RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({ pos: vec(point1["+"](translation.x), pfeilsteps["+"](translation.y), point2["+"](translation.z)), axis: vec(0, 1["-u"](), 0), length: stepsize, color: colour, visible: true }),])); } ;
+          "64";
+          if ((((plane === "-z_direction") || ((typeof plane === "object") && RS_equals(plane, "-z_direction"))))) {
+            "65";
+            B_arrows.append(RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({ pos: vec(point1["+"](translation.x), point2["+"](translation.y), pfeilsteps["+"](translation.z)), axis: vec(0, 0, 1["-u"]()), length: stepsize, color: colour, visible: true }),])); } ;
+          "66";
+          if ((((plane === "-x_direction") || ((typeof plane === "object") && RS_equals(plane, "-x_direction"))))) {
+            "67";
+            B_arrows.append(RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({ pos: vec(pfeilsteps["+"](translation.x), point1["+"](translation.y), point2["+"](translation.z)), axis: vec(1["-u"](), 0, 0), length: stepsize, color: colour, visible: true }),])); } ;
+          "68";
+          if ((((plane === "y_direction") || ((typeof plane === "object") && RS_equals(plane, "y_direction"))))) {
+            "69";
+            B_arrows.append(RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({ pos: vec(point1["+"](translation.x), pfeilsteps["+"](translation.y)["-"](stepsize), point2["+"](translation.z)), axis: vec(0, 1, 0), length: stepsize, color: colour, visible: true }),])); } ;
+          "70";
+          if ((((plane === "z_direction") || ((typeof plane === "object") && RS_equals(plane, "z_direction"))))) {
+            "71";
+            B_arrows.append(RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({ pos: vec(point1["+"](translation.x), point2["+"](translation.y), pfeilsteps["+"](translation.z)["-"](stepsize)), axis: vec(0, 0, 1), length: stepsize, color: colour, visible: true }),])); } ;
+          "72";
+          if ((((plane === "x_direction") || ((typeof plane === "object") && RS_equals(plane, "x_direction"))))) {
+            "73";
+            B_arrows.append(RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({ pos: vec(pfeilsteps["+"](translation.x)["-"](stepsize), point1["+"](translation.y), point2["+"](translation.z)), axis: vec(1, 0, 0), length: stepsize, color: colour, visible: true }),])); } ; }; }; }; };
+  function E_Field_arrows() {
+    var start = ((((((0 === arguments.length["-"](1)) && (arguments[arguments.length["-"](1)] !== null)) && (typeof arguments[arguments.length["-"](1)] === "object")) && (arguments[arguments.length["-"](1)][RS_kwargs_symbol] === true))) ? undefined : arguments[0]);
+    var stepsize = ((((((1 === arguments.length["-"](1)) && (arguments[arguments.length["-"](1)] !== null)) && (typeof arguments[arguments.length["-"](1)] === "object")) && (arguments[arguments.length["-"](1)][RS_kwargs_symbol] === true))) ? undefined : arguments[1]);
+    var height = ((((((2 === arguments.length["-"](1)) && (arguments[arguments.length["-"](1)] !== null)) && (typeof arguments[arguments.length["-"](1)] === "object")) && (arguments[arguments.length["-"](1)][RS_kwargs_symbol] === true))) ? undefined : arguments[2]);
+    var plane = ((((((3 === arguments.length["-"](1)) && (arguments[arguments.length["-"](1)] !== null)) && (typeof arguments[arguments.length["-"](1)] === "object")) && (arguments[arguments.length["-"](1)][RS_kwargs_symbol] === true))) ? undefined : arguments[3]);
+    var colour = ((((((4 === arguments.length["-"](1)) && (arguments[arguments.length["-"](1)] !== null)) && (typeof arguments[arguments.length["-"](1)] === "object")) && (arguments[arguments.length["-"](1)][RS_kwargs_symbol] === true))) ? undefined : arguments[4]);
+    var translation = ((((arguments[5] === undefined) || (((((5 === arguments.length["-"](1)) && (arguments[arguments.length["-"](1)] !== null)) && (typeof arguments[arguments.length["-"](1)] === "object")) && (arguments[arguments.length["-"](1)][RS_kwargs_symbol] === true))))) ? E_Field_arrows.__defaults__.translation : arguments[5]);
+    var RS_kwargs_obj = arguments[arguments.length["-"](1)];
+    if ((((RS_kwargs_obj === null) || (typeof RS_kwargs_obj !== "object")) || (RS_kwargs_obj[RS_kwargs_symbol] !== true))) { RS_kwargs_obj = { }; };
+    if (Object.prototype.hasOwnProperty.call(RS_kwargs_obj, "translation")) {
+      translation = RS_kwargs_obj.translation; } ;
+    var RS_ls, pfeilsteps, point2, point1;
+    "76";
+    var RS_Iter13 = RS_Iterable(range(start["-u"](), start["+"](stepsize), stepsize));
+    for (var RS_Index13 = 0; RS_Index13["<"](RS_Iter13.length); RS_Index13++) {
+      point1 = RS_Iter13[RS_Index13];
+      "77";
+      var RS_Iter14 = RS_Iterable(range(start["-u"](), start["+"](stepsize), stepsize));
+      for (var RS_Index14 = 0; RS_Index14["<"](RS_Iter14.length); RS_Index14++) {
+        point2 = RS_Iter14[RS_Index14];
+        "78";
+        var RS_Iter15 = RS_Iterable(range(height["-"](stepsize)["-u"](), height["+"](stepsize), stepsize));
+        for (var RS_Index15 = 0; RS_Index15["<"](RS_Iter15.length); RS_Index15++) {
+          pfeilsteps = RS_Iter15[RS_Index15];
+          "79";
+          if ((((plane === "-y_direction") || ((typeof plane === "object") && RS_equals(plane, "-y_direction"))))) {
+            "80";
+            E_arrows.append(RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({ pos: vec(point1["+"](translation.x), pfeilsteps["+"](translation.y), point2["+"](translation.z)), axis: vec(0, 1["-u"](), 0), length: stepsize, color: colour, visible: true }),])); } ;
+          "81";
+          if ((((plane === "-z_direction") || ((typeof plane === "object") && RS_equals(plane, "-z_direction"))))) {
+            "82";
+            E_arrows.append(RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({ pos: vec(point1["+"](translation.x), point2["+"](translation.y), pfeilsteps["+"](translation.z)), axis: vec(0, 0, 1["-u"]()), length: stepsize, color: colour, visible: true }),])); } ;
+          "83";
+          if ((((plane === "-x_direction") || ((typeof plane === "object") && RS_equals(plane, "-x_direction"))))) {
+            "84";
+            E_arrows.append(RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({ pos: vec(pfeilsteps["+"](translation.x), point1["+"](translation.y), point2["+"](translation.z)), axis: vec(1["-u"](), 0, 0), length: stepsize, color: colour, visible: true }),])); } ;
+          "85";
+          if ((((plane === "y_direction") || ((typeof plane === "object") && RS_equals(plane, "y_direction"))))) {
+            "86";
+            E_arrows.append(RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({ pos: vec(point1["+"](translation.x), pfeilsteps["+"](translation.y)["-"](stepsize), point2["+"](translation.z)), axis: vec(0, 1, 0), length: stepsize, color: colour, visible: true }),])); } ;
+          "87";
+          if ((((plane === "z_direction") || ((typeof plane === "object") && RS_equals(plane, "z_direction"))))) {
+            "88";
+            E_arrows.append(RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({ pos: vec(point1["+"](translation.x), point2["+"](translation.y), pfeilsteps["+"](translation.z)["-"](stepsize)), axis: vec(0, 0, 1), length: stepsize, color: colour, visible: true }),])); } ;
+          "89";
+          if ((((plane === "x_direction") || ((typeof plane === "object") && RS_equals(plane, "x_direction"))))) {
+            "90";
+            E_arrows.append(RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({ pos: vec(pfeilsteps["+"](translation.x)["-"](stepsize), point1["+"](translation.y), point2["+"](translation.z)), axis: vec(1, 0, 0), length: stepsize, color: colour, visible: true }),])); } ; }; }; }; };
+  function coordoffield(start, height, plane, translation, strength, fieldtype) {
+    var RS_ls;
+    "93";
+    if ((((fieldtype === "Efield") || ((typeof fieldtype === "object") && RS_equals(fieldtype, "Efield"))))) {
+      "94";
+      if ((((plane === "-y_direction") || ((typeof plane === "object") && RS_equals(plane, "-y_direction"))))) {
+        "95";
+        Efieldcoord.append(RS_list_decorate([start["-u"]()["+"](translation.x),start["+"](translation.x),height["-u"]()["+"](translation.y),height["+"](translation.y),start["-u"]()["+"](translation.z),start["+"](translation.z),vec(0, slide_Efield.value["-u"](), 0),])); } ;
+      "96";
+      if ((((plane === "-z_direction") || ((typeof plane === "object") && RS_equals(plane, "-z_direction"))))) {
+        "97";
+        Efieldcoord.append(RS_list_decorate([start["-u"]()["+"](translation.x),start["+"](translation.x),start["-u"]()["+"](translation.y),start["+"](translation.y),height["-u"]()["+"](translation.z),height["+"](translation.z),vec(0, 0, slide_Efield.value["-u"]()),])); } ;
+      "98";
+      if ((((plane === "-x_direction") || ((typeof plane === "object") && RS_equals(plane, "-x_direction"))))) {
+        "99";
+        Efieldcoord.append(RS_list_decorate([height["-u"]()["+"](translation.x),height["+"](translation.x),start["-u"]()["+"](translation.y),start["+"](translation.y),start["-u"]()["+"](translation.z),start["+"](translation.z),vec(slide_Efield.value["-u"](), 0, 0),])); } ;
+      "100";
+      if ((((plane === "y_direction") || ((typeof plane === "object") && RS_equals(plane, "y_direction"))))) {
+        "101";
+        Efieldcoord.append(RS_list_decorate([start["-u"]()["+"](translation.x),start["+"](translation.x),height["-u"]()["+"](translation.y),height["+"](translation.y),start["-u"]()["+"](translation.z),start["+"](translation.z),vec(0, Estrength, 0),])); } ;
+      "102";
+      if ((((plane === "z_direction") || ((typeof plane === "object") && RS_equals(plane, "z_direction"))))) {
+        "103";
+        Efieldcoord.append(RS_list_decorate([start["-u"]()["+"](translation.x),start["+"](translation.x),start["-u"]()["+"](translation.y),start["+"](translation.y),height["-u"]()["+"](translation.z),height["+"](translation.z),vec(0, 0, Estrength),])); } ;
+      "104";
+      if ((((plane === "x_direction") || ((typeof plane === "object") && RS_equals(plane, "x_direction"))))) {
+        "105";
+        Efieldcoord.append(RS_list_decorate([height["-u"]()["+"](translation.x),height["+"](translation.x),start["-u"]()["+"](translation.y),start["+"](translation.y),start["-u"]()["+"](translation.z),start["+"](translation.z),vec(slide_Efield.value, 0, 0),])); } ; } ;
+    "108";
+    if ((((fieldtype === "Bfield") || ((typeof fieldtype === "object") && RS_equals(fieldtype, "Bfield"))))) {
+      "109";
+      if ((((plane === "-y_direction") || ((typeof plane === "object") && RS_equals(plane, "-y_direction"))))) {
+        "110";
+        Bfieldcoord.append(RS_list_decorate([start["-u"]()["+"](translation.x),start["+"](translation.x),height["-u"]()["+"](translation.y),height["+"](translation.y),start["-u"]()["+"](translation.z),start["+"](translation.z),vec(0, slide_Bfield.value["-u"](), 0),])); } ;
+      "111";
+      if ((((plane === "-z_direction") || ((typeof plane === "object") && RS_equals(plane, "-z_direction"))))) {
+        "112";
+        Bfieldcoord.append(RS_list_decorate([start["-u"]()["+"](translation.x),start["+"](translation.x),start["-u"]()["+"](translation.y),start["+"](translation.y),height["-u"]()["+"](translation.z),height["+"](translation.z),vec(0, 0, slide_Bfield.value["-u"]()),])); } ;
+      "113";
+      if ((((plane === "-x_direction") || ((typeof plane === "object") && RS_equals(plane, "-x_direction"))))) {
+        "114";
+        Bfieldcoord.append(RS_list_decorate([height["-u"]()["+"](translation.x),height["+"](translation.x),start["-u"]()["+"](translation.y),start["+"](translation.y),start["-u"]()["+"](translation.z),start["+"](translation.z),vec(slide_Bfield.value["-u"](), 0, 0),])); } ;
+      "115";
+      if ((((plane === "y_direction") || ((typeof plane === "object") && RS_equals(plane, "y_direction"))))) {
+        "116";
+        Bfieldcoord.append(RS_list_decorate([start["-u"]()["+"](translation.x),start["+"](translation.x),height["-u"]()["+"](translation.y),height["+"](translation.y),start["-u"]()["+"](translation.z),start["+"](translation.z),vec(0, slide_Bfield.value, 0),])); } ;
+      "117";
+      if ((((plane === "z_direction") || ((typeof plane === "object") && RS_equals(plane, "z_direction"))))) {
+        "118";
+        Bfieldcoord.append(RS_list_decorate([start["-u"]()["+"](translation.x),start["+"](translation.x),start["-u"]()["+"](translation.y),start["+"](translation.y),height["-u"]()["+"](translation.z),height["+"](translation.z),vec(0, 0, slide_Bfield.value),])); } ;
+      "119";
+      if ((((plane === "x_direction") || ((typeof plane === "object") && RS_equals(plane, "x_direction"))))) {
+        "120";
+        Bfieldcoord.append(RS_list_decorate([height["-u"]()["+"](translation.x),height["+"](translation.x),start["-u"]()["+"](translation.y),start["+"](translation.y),start["-u"]()["+"](translation.z),start["+"](translation.z),vec(slide_Bfield.value, 0, 0),])); } ; } ; };
+  function create_E_field(start, stepsize, height, plane, translation, strength) {
+    var RS_ls;
+    "123";
+    creategrids(start, stepsize, height, plane, translation);
+    "124";
+    E_Field_arrows(start, stepsize, height, plane, vec(1, 0, 0), translation);
+    "125";
+    coordoffield(start, height, plane, translation, strength, "Efield"); };
+  function create_B_field(start, stepsize, height, plane, translation, strength) {
+    var RS_ls;
+    "128";
+    creategrids(start, stepsize, height, plane, translation);
+    "129";
+    B_Field_arrows(start, stepsize, height, plane, vec(0, 0, 1), translation);
+    "130";
+    coordoffield(start, height, plane, translation, strength, "Bfield"); };
+  function kreuzproduct(a, b) {
+    var RS_ls, x, y, z;
+    "133";
+    x = a.y["*"](b.z)["-"](a.z["*"](b.y));
+    "134";
+    y = a.z["*"](b.x)["-"](a.x["*"](b.z));
+    "135";
+    z = a.x["*"](b.y)["-"](a.y["*"](b.x));
+    "136";
+    return vec(x, y, z); };
+  function ort() {
+    var RS_ls, ball, ortsvek;
+    "139";
+    ball = RS_interpolate_kwargs.call(this, sphere, [RS_desugar_kwargs({ pos: scene.mouse.pos, color: color.green, radius: 1, make_trail: true }),]);
+    "140";
+    ortsvek = ball.pos;
+    "141";
+    return ortsvek; };
+  function velo(ortsvek, _) { var RS_ls, a, ball, pfeil, t, time, RS_unpack, Efield, Bfield, counter1, counter2, RS_Iter16, RS_Index16, RS_Iter17, RS_Index17, __this = this; var __frame = { name: "velo", line: 441 }; return __func(_, this, arguments, velo, 1, __frame, function __$velo() {
+      "146";
+      a = vec(0, 0, 0);
+      "147";
+      ball = RS_interpolate_kwargs.call(__this, sphere, [RS_desugar_kwargs({ pos: ortsvek, color: color.green, radius: 1, make_trail: true, charge: 0.1, mass: 1 }),]);
+      "148";
+      ball.velocity = scene.mouse.pos["-"](ortsvek)["/"](2);
+      "149";
+      pfeil = RS_interpolate_kwargs.call(__this, arrow, [RS_desugar_kwargs({ pos: ball.pos, axis: ball.velocity, color: color.yellow }),]);
+      "150";
+      t = 0;
+      "151";
+      time = slide_time.value;
+      "152"; return (function ___(__break) { var __more; var __loop = __cb(_, __frame, 0, 0, function __$velo() { __more = false;
+          var __1 = t["<"](time); if (__1) {
+            "153";
+            return rate(3000, __cb(_, __frame, 17, 12, function __$velo() {
+              "154";
+              RS_unpack = [vec(0, 0, 0),vec(0, 0, 0),];
+              Efield = RS_unpack[0];
+              Bfield = RS_unpack[1];
+              "155";
+              RS_Iter16 = RS_Iterable(range(0, len(Efieldcoord)));
+              for (RS_Index16 = 0; RS_Index16["<"](RS_Iter16.length); RS_Index16++) {
+                counter1 = RS_Iter16[RS_Index16];
+                "156";
+                if ((((((ball.pos.x[">"](Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][0]) && ball.pos.x["<"](Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][1])) && ball.pos.y[">"](Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][2])) && ball.pos.y["<"](Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][3])) && ball.pos.z[">"](Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][4])) && ball.pos.z["<"](Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][5]))) {
+                  "157";
+                  if (Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6].z[">"](0)) {
+                    "158";
+                    Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6] = vec(0, 0, slide_Efield.value);
+                    "159";
+                    Efield = Efield["+="](Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6]); } ;
+                  "160";
+                  if (Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6].z["<"](0)) {
+                    "161";
+                    Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6] = vec(0, 0, slide_Efield.value["-u"]());
+                    "162";
+                    Efield = Efield["+="](Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6]); } ;
+                  "163";
+                  if (Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6].y[">"](0)) {
+                    "164";
+                    Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6] = vec(0, slide_Efield.value, 0);
+                    "165";
+                    Efield = Efield["+="](Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6]); } ;
+                  "166";
+                  if (Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6].y["<"](0)) {
+                    "167";
+                    Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6] = vec(0, slide_Efield.value["-u"](), 0);
+                    "168";
+                    Efield = Efield["+="](Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6]); } ;
+                  "169";
+                  if (Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6].x[">"](0)) {
+                    "170";
+                    Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6] = vec(slide_Efield.value, 0, 0);
+                    "171";
+                    Efield = Efield["+="](Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6]); } ;
+                  "172";
+                  if (Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6].x["<"](0)) {
+                    "173";
+                    Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6] = vec(slide_Efield.value["-u"](), 0, 0);
+                    "174";
+                    Efield = Efield["+="](Efieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Efieldcoord.length["+"](counter1) : counter1)][6]); } ; } ; };              "175";
+              RS_Iter17 = RS_Iterable(range(0, len(Bfieldcoord)));
+              for (RS_Index17 = 0; RS_Index17["<"](RS_Iter17.length); RS_Index17++) {
+                counter2 = RS_Iter17[RS_Index17];
+                "176";
+                if ((((((ball.pos.x[">"](Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][0]) && ball.pos.x["<"](Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][1])) && ball.pos.y[">"](Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][2])) && ball.pos.y["<"](Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][3])) && ball.pos.z[">"](Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][4])) && ball.pos.z["<"](Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][5]))) {
+                  "177";
+                  if (Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][6].z[">"](0)) {
+                    "178";
+                    Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][6] = vec(0, 0, slide_Bfield.value);
+                    "179";
+                    Bfield = Bfield["+="](Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][6]); } ;
+                  "180";
+                  if (Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][6].z["<"](0)) {
+                    "181";
+                    Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][6] = vec(0, 0, slide_Bfield.value["-u"]());
+                    "182";
+                    Bfield = Bfield["+="](Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][6]); } ;
+                  "183";
+                  if (Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][6].y[">"](0)) {
+                    "184";
+                    Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][6] = vec(0, slide_Bfield.value, 0);
+                    "185";
+                    Bfield = Bfield["+="](Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][6]); } ;
+                  "186";
+                  if (Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][6].y["<"](0)) {
+                    "187";
+                    Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][6] = vec(0, slide_Bfield.value["-u"](), 0);
+                    "188";
+                    Bfield = Bfield["+="](Bfieldcoord[((((typeof counter1 === "number") && counter1["<"](0))) ? Bfieldcoord.length["+"](counter1) : counter1)][6]); } ;
+                  "189";
+                  if (Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][6].x[">"](0)) {
+                    "190";
+                    Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][6] = vec(slide_Bfield.value, 0, 0);
+                    "191";
+                    Bfield = Bfield["+="](Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][6]); } ;
+                  "192";
+                  if (Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][6].x["<"](0)) {
+                    "193";
+                    Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][6] = vec(slide_Bfield.value["-u"](), 0, 0);
+                    "194";
+                    Bfield = Bfield["+="](Bfieldcoord[((((typeof counter2 === "number") && counter2["<"](0))) ? Bfieldcoord.length["+"](counter2) : counter2)][6]); } ; } ; };              "195";
+              a = ball.charge["*"](kreuzproduct(ball.velocity, Bfield)["+"](Efield))["/"](ball.mass);
+              "196";
+              ball.velocity = ball.velocity["+"](a["*"](deltat));
+              "197";
+              ball.pos = ball.pos["+"](ball.velocity["*"](deltat));
+              "198";
+              t = t["+"](deltat); while (__more) { __loop(); }; __more = true; }, true)); } else { __break(); } ; }); do { __loop(); } while (__more); __more = true; })(_); }); };  function invis(objectlist) {
+    var RS_ls, counter1;
+    "201";
+    var RS_Iter18 = RS_Iterable(range(0, len(objectlist)));
+    for (var RS_Index18 = 0; RS_Index18["<"](RS_Iter18.length); RS_Index18++) {
+      counter1 = RS_Iter18[RS_Index18];
+      "202";
+      objectlist[((((typeof counter1 === "number") && counter1["<"](0))) ? objectlist.length["+"](counter1) : counter1)].visible = false; }; };  function empty(list) {
+    var RS_ls, counter1;
+    "205";
+    var RS_Iter19 = RS_Iterable(range(0, len(list)));
+    for (var RS_Index19 = 0; RS_Index19["<"](RS_Iter19.length); RS_Index19++) {
+      counter1 = RS_Iter19[RS_Index19];
+      "206";
+      list[((((typeof counter1 === "number") && counter1["<"](0))) ? list.length["+"](counter1) : counter1)][6] = vec(0, 0, 0); }; };  function make_Fields(m) {
+    var RS_ls, val;
+    "210";
+    invis(grid);
+    "211";
+    invis(E_arrows);
+    "212";
+    invis(B_arrows);
+    "213";
+    empty(Efieldcoord);
+    "214";
+    empty(Bfieldcoord);
+    "215";
+    val = m.selected;
+    "216";
+    if ((((val === "Only B-Field") || ((typeof val === "object") && RS_equals(val, "Only B-Field"))))) {
+      "217";
+      create_B_field(40, 20, 40, "z_direction", vec(0, 0, 0), slide_Bfield.value);
+      "218";
+      T.val("The Blue arrows inidicate a homogeneous B-Field pointing in the z-direction. \n\nIf you put the charge in the B-Field and give it an inital velocity perpendicular to the B-Field itspath will look like a solenoid.\n\nA special case of this movement is a circle. Can you figure out what you need to do to make it move in a circle? \n\nCan you use the the Lorentz-Force law to explain the movement? (hint: you can use the right hand rule for calculating cross products)"); } ;
+    "221";
+    if ((((val === "Only E-Field") || ((typeof val === "object") && RS_equals(val, "Only E-Field"))))) {
+      "222";
+      create_E_field(40, 20, 40, "z_direction", vec(0, 0, 0), slide_Efield.value);
+      "223";
+      T.val("The red arrows show an homogeneous E-Field pointing in z-direction. \n\nIn which direction is the acceleration, when the charge is in the field (F=m*a)?"); } ;
+    "224";
+    if ((((val === "Both Fields crossed") || ((typeof val === "object") && RS_equals(val, "Both Fields crossed"))))) {
+      "225";
+      slide_Efield.value = 25;
+      "226";
+      E_text.text = slide_Efield.value;
+      "227";
+      slide_Bfield.value = 10;
+      "228";
+      B_text.text = slide_Bfield.value;
+      "229";
+      create_B_field(40, 40, 40, "z_direction", vec(0, 0, 0), slide_Bfield.value);
+      "230";
+      create_E_field(40, 40, 40, "y_direction", vec(0, 0, 0), slide_Efield.value);
+      "231";
+      T.val("The blue arrows indicate a homogeneous B-Field in the z-direction and the red arrows indicate a homogeneous E-Field in the y-direction. \n\nIf you put thecharge in the fields and dont give it any initial velocity it will move in a cycloid motion.\n\nBy varying the strength of the fields you can adapt the radius of this movement."); } ;
+    "234";
+    if ((((val === "Both Fields same direction") || ((typeof val === "object") && RS_equals(val, "Both Fields same direction"))))) {
+      "235";
+      create_B_field(40, 40, 40, "z_direction", vec(0, 0, 0), slide_Bfield.value);
+      "236";
+      create_E_field(40, 20, 40, "z_direction", vec(0, 0, 0), slide_Efield.value);
+      "237";
+      T.val("The B-Field and the E-Field point in the z-direction."); } ;
+    "238";
+    if ((((val === "2 E-Fields") || ((typeof val === "object") && RS_equals(val, "2 E-Fields"))))) {
+      "239";
+      create_E_field(40, 20, 40, "x_direction", vec(0, 0, 0), slide_Efield.value);
+      "240";
+      create_E_field(40, 20, 40, "-x_direction", vec(80, 0, 0), slide_Efield.value);
+      "241";
+      T.val("Here you have 2 E-Fields which point in opposite directions."); } ; };  function timetext(s) {
+    var RS_ls;
+    "244";
+    time_text.text = "{:1.2f}".format(s.value); };
+  function E_text(s) {
+    var RS_ls, Estrenght;
+    "247";
+    E_text.text = "{:1.2f}".format(s.value);
+    "248";
+    Estrenght = s.value; };
+  function B_text(s) {
+    var RS_ls;
+    "252";
+    B_text.text = "{:1.2f}".format(s.value); }; var __frame = { name: "main", line: 32 }; return __func(_, this, arguments, main, 0, __frame, function __$main() { version = RS_list_decorate(["2.7","glowscript",]); Array.prototype["+"] = function(r) { return this.concat(r); }; Array.prototype["*"] = function(r) { return __array_times_number(this, r); }; __name__ = "__main__"; window.__GSlang = "vpython"; box = vp_box; sphere = vp_sphere; simple_sphere = vp_simple_sphere; cylinder = vp_cylinder; pyramid = vp_pyramid; cone = vp_cone; helix = vp_helix; ellipsoid = vp_ellipsoid; ring = vp_ring; arrow = vp_arrow; compound = vp_compound; display = canvas; vector = vec; print = GSprint; type = pytype; scene = canvas(); strings = RS_modules.pythonize.strings; strings(); "15"; scene.caption = "You can create your own Electric and Magnetic fields by selecting an option in the menu below.\nOn the right you find a description of the chosen situation. ( If there are no arrows indicating a field, then there is no field even though the slider indicates a specific\nstrength.) The first click on the canvas above will create a positive charge at the location of the mouse. The second click will give it a velocity in the direction from the\nlocation of the first click to the location of the second click with a speed, which is proportional to the distance of these two points. \nAfter you have given the charge a velocity, you have to wait until the charge has finished its flight before you can create a new charge.\nYou can create an infinite amount of charges. \nThe first slider determines the duration of the flight, the other two sliders determine the strength of the fields.\n\n\nRight button drag or Ctrl-drag to rotate \"camera\" to view scene. To zoom, drag with middle button or Alt/Option depressed, or use scroll wheel.\nOn a two-button mouse, middle is left + right. Touch screen: pinch/extend to zoom, swipe or two-finger rotate."; "17"; scene.width = 800; "18"; scene.height = 400; "21"; "33"; if (!creategrids.__defaults__) { Object.defineProperties(creategrids, { __defaults__: { value: { translation: vec(0, 0, 0) } }, __handles_kwarg_interpolation__: { value: true }, __argnames__: { value: ["start","stepsize","height","plane","translation",] } }); } ; "58"; if (!B_Field_arrows.__defaults__) { Object.defineProperties(B_Field_arrows, { __defaults__: { value: { translation: vec(0, 0, 0) } }, __handles_kwarg_interpolation__: { value: true }, __argnames__: { value: ["start","stepsize","height","plane","colour","translation",] } }); } ; "75"; if (!E_Field_arrows.__defaults__) { Object.defineProperties(E_Field_arrows, { __defaults__: { value: { translation: vec(0, 0, 0) } }, __handles_kwarg_interpolation__: { value: true }, __argnames__: { value: ["start","stepsize","height","plane","colour","translation",] } }); } ; "92"; if (!coordoffield.__argnames__) { Object.defineProperties(coordoffield, { __argnames__: { value: ["start","height","plane","translation","strength","fieldtype",] } }); } ; "122"; if (!create_E_field.__argnames__) { Object.defineProperties(create_E_field, { __argnames__: { value: ["start","stepsize","height","plane","translation","strength",] } }); } ; "127"; if (!create_B_field.__argnames__) { Object.defineProperties(create_B_field, { __argnames__: { value: ["start","stepsize","height","plane","translation","strength",] } }); } ; "132"; if (!kreuzproduct.__argnames__) { Object.defineProperties(kreuzproduct, { __argnames__: { value: ["a","b",] } }); } ; "138"; "143"; deltat = 0.001; "145"; if (!velo.__argnames__) { Object.defineProperties(velo, { __argnames__: { value: ["ortsvek","_",] } }); } ; "200"; if (!invis.__argnames__) { Object.defineProperties(invis, { __argnames__: { value: ["objectlist",] } }); } ; "204"; if (!empty.__argnames__) { Object.defineProperties(empty, { __argnames__: { value: ["list",] } }); } ; "209"; if (!make_Fields.__argnames__) { Object.defineProperties(make_Fields, { __argnames__: { value: ["m",] } }); } ; "243"; if (!timetext.__argnames__) { Object.defineProperties(timetext, { __argnames__: { value: ["s",] } }); } ; "246"; if (!E_text.__argnames__) { Object.defineProperties(E_text, { __argnames__: { value: ["s",] } }); } ; "251";
+    if (!B_text.__argnames__) { Object.defineProperties(B_text, {
+        __argnames__: { value: ["s",] } }); } ;
+    "254";
+    scene.append_to_caption("\n\n");
+    "255";
+    RS_interpolate_kwargs.call(__this, wtext, [RS_desugar_kwargs({ text: "Vary the duration of the flighttime of the charge: \n" }),]);
+    "256";
+    slide_time = RS_interpolate_kwargs.call(__this, slider, [RS_desugar_kwargs({ min: 1, max: 80, value: 5, length: 220, bind: timetext, right: 15 }),]);
+    "257";
+    time_text = RS_interpolate_kwargs.call(__this, wtext, [RS_desugar_kwargs({ text: "{:1.2f}".format(slide_time.value) }),]);
+    "259";
+    scene.append_to_caption("\n\n");
+    "260";
+    RS_interpolate_kwargs.call(__this, wtext, [RS_desugar_kwargs({ text: "Vary the strength of the E-field: \n" }),]);
+    "261";
+    slide_Efield = RS_interpolate_kwargs.call(__this, slider, [RS_desugar_kwargs({ min: 10, max: 100, value: 20, length: 220, bind: E_text, right: 15 }),]);
+    "262";
+    E_text = RS_interpolate_kwargs.call(__this, wtext, [RS_desugar_kwargs({ text: "{:1.2f}".format(slide_Efield.value) }),]);
+    "264";
+    scene.append_to_caption("\n\n");
+    "265";
+    RS_interpolate_kwargs.call(__this, wtext, [RS_desugar_kwargs({ text: "Vary the strength of the B-field: \n" }),]);
+    "266";
+    slide_Bfield = RS_interpolate_kwargs.call(__this, slider, [RS_desugar_kwargs({ min: 1, max: 15, value: 3, length: 220, bind: B_text, right: 15 }),]);
+    "267";
+    B_text = RS_interpolate_kwargs.call(__this, wtext, [RS_desugar_kwargs({ text: "{:1.2f}".format(slide_Bfield.value) }),]);
+    "269";
+    scene.append_to_caption("\n\n");
+    "270";
+    RS_interpolate_kwargs.call(__this, wtext, [RS_desugar_kwargs({ text: "Create your own fields: \n" }),]);
+    "271";
+    m1 = RS_interpolate_kwargs.call(__this, menu, [RS_desugar_kwargs({ choices: RS_list_decorate(["Choose an object","Only B-Field","Only E-Field","Both Fields crossed","Both Fields same direction","2 E-Fields",]), index: 0, bind: make_Fields }),]);
+    "272";
+    scene.append_to_caption("\n\n");
+    "273";
+    scene.append_to_caption("\n\n");
+    "275";    return (function ___closure(_) { var RS_d; RS_d = { }; RS_d["width"] = "400px"; RS_d["float"] = "right"; RS_d["padding"] = "5px"; RS_d["text-align"] = "left"; return _(null, RS_d); })(__cb(_, __frame, 711, 69, function ___(__0, __1) { $("<div id=\"buttons\"><\/div>").appendTo(scene.title_anchor).css(__1);
+      "276";
+      $("<p><b>Lorentz-Force equation: </b></p><b><p>").appendTo("#buttons");
+      "277";
+      $("<p>F_l = q * ( E + v cross B)</p>").appendTo("#buttons");
+      "278";
+      T = $("<textarea/>").val("The Lorentz Force law is the only physical law used in this programm.\n").appendTo("#buttons").css("width", "400px").css("height", "300px").css("font-family", "sans-serif").css("font-size", "14px");
+      "282";
+      grid = RS_list_decorate([]);
+      "283";
+      B_arrows = RS_list_decorate([]);
+      "284";
+      E_arrows = RS_list_decorate([]);
+      "285";
+      Efield = vec(0, 0, 0);
+      "286";
+      Bfield = vec(0, 0, 0);
+      "287";
+      Efieldcoord = RS_list_decorate([]);
+      "288";
+      Bfieldcoord = RS_list_decorate([]);
+      "289";
+      Estrength = slide_Efield.value;
+      "290";
+      coordinates();
+      "292";
+      counter = 0;
+      "293"; return (function ___(__break) { var __more; var __loop = __cb(_, __frame, 0, 0, function __$main() { __more = false;
+          var __3 = counter[">"](1["-u"]()); if (__3) {
+            "294";
+            return scene.waitfor("click", __cb(_, __frame, 748, 14, function __$main() {
+              "295"; return (function __$main(__then) {
+                if (RS_equals((counter % 2), 0)) {
+                  "296";
+                  balu = ort();
+                  "297"; __then(); } else {
+                  "298";
+                  return velo(balu, __cb(_, __frame, 756, 12, __then, true)); } ; })(function __$main() {
+                "299";
+                counter = counter["+"](1); while (__more) { __loop(); }; __more = true; }); }, true)); } else { __break(); } ; }); do { __loop(); } while (__more); __more = true; })(_); }, true)); });};
+if (!main.__argnames__) { Object.defineProperties(main, {
+    __argnames__: { value: ["_",] } });};
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; main(__func) })})()
+// END JAVASCRIPT
+//--><!]]></script>
+</div>
+{% endblock %}

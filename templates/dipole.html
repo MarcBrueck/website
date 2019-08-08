@@ -1,0 +1,138 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="glowscript" class="glowscript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://s3.amazonaws.com/glowscript/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css" />
+<link type="text/css" href="https://s3.amazonaws.com/glowscript/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/package/glow.2.7.min.js"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+// START JAVASCRIPT
+;(function() { var __rt=srequire('streamline/lib/callbacks/runtime').runtime(__filename, false),__func=__rt.__func,__cb=__rt.__cb; function main(_) { var version, scene, scene1, s, X_axis, XLabel, Y_axis, YLabel, Z_axis, ZLabel, loca1, loca2, positive_charge, negative_charge, charge_size, Q1, Q2, startobj, k, coord1, coord2, coord1and2, field1, field2, e, e1, e2, r, r1, r2, filler, d, p_vector, n_vector, t_vector, t1_vector, field_lines, line_arrows, p_toggle, n_toggle, t_toggle, t1_toggle, field_toggle, counter, counter1, counter2, counter3, counter4, counter5;
+  function createFieldLines() {
+    var startingpoints = [];
+    var R = 0.01;
+    for (var phi = 0; phi["<="](2["*"](pi)); phi = phi["+"](pi["/"](4))) {
+      for (var theta = 0; theta["<="](2["*"](pi)); theta = theta["+"](pi["/"](4))) {
+        var x = R["*"](sin(theta))["*"](cos(phi));
+        var y = R["*"](sin(theta))["*"](sin(phi));
+        var z = R["*"](cos(theta));
+        r1 = vec(x, y, z)["+"](positive_charge.pos);
+        startingpoints.push(r1); }; };    var fieldpoint;
+    var Q1 = positive_charge.q;
+    var Q2 = negative_charge.q;
+    var counting = 0;
+    for (var counter5 in startingpoints) {
+      fieldpoint = startingpoints[counter5];
+      var count = 0;
+      var linie = curve({ visible: field_toggle });
+      while ((mag(fieldpoint["-"](negative_charge.pos))[">="](1.5) && count["<"](500))) {
+        r1 = fieldpoint["-"](positive_charge.pos);
+        r2 = fieldpoint["-"](negative_charge.pos);
+        if (((counting % 4) == 0)) {
+          e = 1["*"](ElectricField(Q1, r1))["+"](ElectricField(Q2, r2))["/"](mag(ElectricField(Q1, r1)["+"](ElectricField(Q2, r2))));
+          line_arrows.push(arrow({ pos: fieldpoint, axis_and_length: e, color: vec(1, 1, 1), visible: field_toggle })); } ;
+        fieldpoint = fieldpoint["+="](ElectricField(Q1, r1)["+"](ElectricField(Q2, r2))["/"](mag(ElectricField(Q1, r1)["+"](ElectricField(Q2, r2)))));
+        counting++;
+        linie.append(fieldpoint);
+        count = count["+"](1); };
+      field_lines.push(linie); }; };  function createPoints() {
+    for (var r = 3; r["<"](1.7["*"](mag(positive_charge.pos["-"](negative_charge.pos)))); r++) {
+      var frequency;
+      if (r["<"](3)) {
+        frequency = pi["/"](2); }
+       else if (r["<"](7)) {
+        frequency = pi["/"](4); }
+       else if (r["<"](10)) {
+        frequency = pi["/"](8); }
+       else {
+        frequency = pi["/"](10); }   ;
+      for (var phi = 0; phi["<="](2["*"](pi)); phi = phi["+="](frequency)) {
+        for (var theta = 0; theta["<="](pi); theta = theta["+="](frequency)) {
+          var y = r["*"](sin(theta))["*"](cos(phi));
+          var z = r["*"](sin(theta))["*"](sin(phi));
+          var x = r["*"](cos(theta));
+          field1 = vec(x, y, z)["+"](positive_charge.pos);
+          field2 = vec(x, y, z)["+"](negative_charge.pos);
+          coord1.push(field1);
+          coord2.push(field2);
+          coord1and2.push(field1);
+          coord1and2.push(field2); }; }; }; };
+  function createVectors() {
+    for (var point1 in coord1) {
+      r = coord1[point1]["-"](positive_charge.pos);
+      e = ElectricField(positive_charge.q, r);
+      p_vector.push(arrow({ pos: coord1[point1], axis_and_length: e, color: vec(1, 0.8, 0), visible: p_toggle })); };
+    for (var point2 in coord2) {
+      r = coord2[point2]["-"](negative_charge.pos);
+      e = ElectricField(negative_charge.q, r);
+      n_vector.push(arrow({ pos: coord2[point2], axis_and_length: e, color: vec(0, 1, 1), visible: n_toggle })); };
+    for (var point3 in coord1and2) {
+      r1 = coord1and2[point3]["-"](positive_charge.pos);
+      r2 = coord1and2[point3]["-"](negative_charge.pos);
+      d = negative_charge.pos["-"](positive_charge.pos);
+      if ((((point3 % 2)) == 0)) {        if (mag(coord1and2[point3]["-"](positive_charge.pos))["-"](mag(positive_charge.pos["-"](negative_charge.pos))["/"](3))["<"](mag(coord1and2[point3]["-"](negative_charge.pos)))) {
+          e = ElectricField(positive_charge.q, r1)["+"](ElectricField(negative_charge.q, r2));
+          t_vector.push(arrow({ pos: coord1and2[point3], axis_and_length: e, color: color.white, visible: t_toggle }));
+          t1_vector.push(arrow({ pos: coord1and2[point3], axis_and_length: e, color: color.white, visible: t1_toggle }));
+          e1 = ElectricField(positive_charge.q, r1);
+          t_vector.push(arrow({ pos: coord1and2[point3], axis_and_length: e1, color: vec(1, 0.8, 0), visible: t_toggle }));
+          e2 = ElectricField(negative_charge.q, r2);
+          t_vector.push(arrow({ pos: coord1and2[point3], axis_and_length: e2, color: vec(0, 1, 1), visible: t_toggle })); } ; }       else {
+        if (mag(coord1and2[point3]["-"](positive_charge.pos))[">"](mag(coord1and2[point3]["-"](negative_charge.pos))["-"](mag(positive_charge.pos["-"](negative_charge.pos))["/"](3)))) {
+          e = ElectricField(positive_charge.q, r1)["+"](ElectricField(negative_charge.q, r2));
+          t_vector.push(arrow({ pos: coord1and2[point3], axis_and_length: e, color: color.white, visible: t_toggle }));
+          t1_vector.push(arrow({ pos: coord1and2[point3], axis_and_length: e, color: color.white, visible: t1_toggle }));
+          e1 = ElectricField(positive_charge.q, r1);
+          t_vector.push(arrow({ pos: coord1and2[point3], axis_and_length: e1, color: vec(1, 0.8, 0), visible: t_toggle }));
+          e2 = ElectricField(negative_charge.q, r2);
+          t_vector.push(arrow({ pos: coord1and2[point3], axis_and_length: e2, color: vec(0, 1, 1), visible: t_toggle })); } ; } ; }; };
+  function ElectricField(q, r) {
+    return (k["*"](q)["*"](r)["/"](pow(mag(r), 3))); };  function hideVectors(array, toggle) {
+    if (toggle) {
+      for (var x in array) {
+        array[x].visible = true; }; }     else {
+      for (var x1 in array) {
+        array[x1].visible = false; }; } ; }; var __frame = { name: "main", line: 1 }; return __func(_, this, arguments, main, 0, __frame, function __$main() { version = ["2.7","glowscript",]; scene = canvas(); Array.prototype.toString = function() { return __parsearray(this); }; $("<div id=\"canvcanv\" style=\"margin-left:auto;margin-right:auto;text-align:center;white-space:nowrap\"><\/div>").appendTo("#overall"); scene1 = canvas({ width: 700, height: 400, style: "left" }); scene1.wrapper.appendTo("#canvcanv"); scene1.range = 10; s = "Here you can see two charges that create an electric field. (Also called a dipole field) \n"; s = s["+="]("The bigger the arrow is the bigger is the magnitude of the electric field at that point.\n"); s = s["+="]("The direction of the arrow is indicates the direction of the field. \n"); s = s["+="]("The amount of arrows or the arrow density do have no meaning. \n"); s = s["+="]("The red arrows indicate the field caused by the positive red charge, the blue ones for the negative charge \n"); s = s["+="]("and the white ones show the total electric field emerging by superposition. \n"); s = s["+="]("By clicking you can move the charges. On the first click it moves the positive charge then the negative one and so on alternately \n"); s = s["+="](" \n"); s = s["+="]("Right button drag or Ctrl-drag to rotate \"camera\" to view scene.\n"); s = s["+="]("To zoom, drag with middle button or Alt/Option depressed, or use scroll wheel.\n"); s = s["+="]("  On a two-button mouse, middle is left + right.\n"); s = s["+="]("Touch screen: pinch/extend to zoom, swipe or two-finger rotate.\n"); scene1.caption = s; $("<div id=\"buttons\"></div>").appendTo(scene1.title_anchor).css({ width: "175px", float: "right", padding: "100px", "text-align": "center" }); $("<span></span>").html("<br>Buttons!<br>_______________________________").prependTo("#buttons").css("margin-bottom", "10px").css({ "font-weight": "bold" }); loca1 = vec(5, 0, 0); loca2 = vec(5["-u"](), 0, 0); charge_size = vec(1, 1, 1)["*"](2); Q1 = 18; Q2 = 18["-u"](); startobj = function() { X_axis = arrow({ pos: vec(35["-u"](), 10, 0), axis_and_length: vec(10, 0, 0), color: color.yellow }); XLabel = label({ canvas: scene1, pos: vec(25["-u"](), 14, 0), color: color.white, box: 0, text: "x-axis" }); Y_axis = arrow({ pos: vec(35["-u"](), 10, 0), axis_and_length: vec(0, 10, 0), color: color.yellow }); YLabel = label({ canvas: scene1, pos: vec(35["-u"](), 24, 0), color: color.white, box: 0, text: "y-axis" }); Z_axis = arrow({ pos: vec(35["-u"](), 10, 0), axis_and_length: vec(0, 0, 10), color: color.yellow }); ZLabel = label({ canvas: scene1, pos: vec(35["-u"](), 14, 12), color: color.white, box: 0, text: "z-axis" }); positive_charge = sphere({ pos: loca1, axis: vec(0, 1, 0), size: charge_size, color: color.red, q: Q1 }); negative_charge = sphere({ pos: loca2, axis: vec(0, 1, 0), size: charge_size, color: color.blue, q: Q2 }); }; startobj(); k = 1; coord1 = []; coord2 = []; coord1and2 = []; p_vector = []; n_vector = []; t_vector = []; t1_vector = []; field_lines = []; line_arrows = []; p_toggle = false; n_toggle = false; t_toggle = false; t1_toggle = false; field_toggle = false; $("<p><b>Show or Hide Vector Fields </b></p><b><p>").appendTo("#buttons"); $("<button/>").text("Show").appendTo("#buttons").css({ color: "black", backgroundColor: "magenta", fontWeight: "bold" }).click(function() { p_toggle = !p_toggle; if (!p_toggle) { $(this).text("Show").css({ color: "black" }); } else { $(this).text("Hide").css({ color: "black" }); } ; hideVectors(p_vector, p_toggle); }); $("<button/>").text("Show").appendTo("#buttons").css({ color: "black", backgroundColor: "cyan", fontWeight: "bold" }).click(function() { n_toggle = !n_toggle; if (!n_toggle) { $(this).text("Show").css({ color: "black" }); } else { $(this).text("Hide").css({ color: "black" }); } ; hideVectors(n_vector, n_toggle); }); $("<button/>").text("Show total field").appendTo("#buttons").css({ color: "black", backgroundColor: "white", fontWeight: "bold" }).click(function() { t1_toggle = !t1_toggle; if (t1_toggle) { $(this).text("Hide total field").css({ color: "black" }); } else { $(this).text("Show total field").css({ color: "black" }); } ; hideVectors(t1_vector, t1_toggle); }); $("<button/>").text("Show Everything").appendTo("#buttons").css({ color: "black", backgroundColor: "white", fontWeight: "bold" }).click(function() { t_toggle = !t_toggle; if (!t_toggle) { $(this).text("Show Everything").css({ color: "black" }); } else { $(this).text("Hide Everything").css({ color: "black" }); } ; hideVectors(t_vector, t_toggle); }); $("<p><b>Show or Hide Field Lines </b></p><b><p>").appendTo("#buttons"); $("<button/>").text("Show Field Lines").appendTo("#buttons").css({ color: "black", backgroundColor: "white", fontWeight: "bold" }).click(function() { field_toggle = !field_toggle; if (field_toggle) { $(this).text("Hide Field Lines").css({ color: "black" }); } else { $(this).text("Show Field Lines").css({ color: "black" }); } ; hideVectors(field_lines, field_toggle); hideVectors(line_arrows, field_toggle); });
+    createPoints();
+    createVectors();
+    createFieldLines();
+    counter = 0; var __2 = false; return (function ___(__break) { var __more; var __loop = __cb(_, __frame, 0, 0, function __$main() { __more = false; if (__2) { counter++; } else { __2 = true; } ; var __1 = counter["<"](100); if (__1) {
+          return scene1.waitfor("click", __cb(_, __frame, 325, 11, function __$main() {
+            if ((((counter % 2)) == 0)) {
+              positive_charge.visible = false;
+              loca1 = scene1.mouse.pos;
+              positive_charge = sphere({ pos: loca1, axis: vec(0, 1, 0), size: charge_size, color: color.red, q: Q1 }); }
+             else {
+              negative_charge.visible = false;
+              loca2 = scene1.mouse.pos;
+              negative_charge = sphere({ pos: loca2, axis: vec(0, 1, 0), size: charge_size, color: color.blue, q: Q2 }); } ;
+            for (counter1 in p_vector) {
+              p_vector[counter1].visible = false;
+              n_vector[counter1].visible = false; };
+            for (counter2 in t_vector) {
+              t_vector[counter2].visible = false; };
+            for (counter3 in field_lines) {
+              field_lines[counter3].visible = false; };
+            for (counter4 in line_arrows) {
+              line_arrows[counter4].visible = false; };
+            for (counter5 in t1_vector) {
+              t1_vector[counter5].visible = false; };            coord1 = [];
+            coord2 = [];
+            coord1and2 = [];
+            p_vector = [];
+            n_vector = [];
+            t_vector = [];
+            t1_vector = [];
+            field_lines = [];
+            line_arrows = [];
+            createPoints();
+            createVectors();
+            createFieldLines(); while (__more) { __loop(); }; __more = true; }, true)); } else { __break(); } ; }); do { __loop(); } while (__more); __more = true; })(_); });};main;
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; main(__func) })})()
+// END JAVASCRIPT
+//--><!]]></script>
+</div>
+{% endblock %}
