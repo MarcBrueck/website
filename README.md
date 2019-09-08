@@ -1,6 +1,6 @@
 # website
 
-This repository contains that are used to build my little website. You can check it out at http://mbrueckner.herokuapp.com/
+This repository contains files that are used to build my little website. You can check it out at http://mbrueckner.herokuapp.com/
 The website is created using flask and is hosted via heroku. Flask is a python package that can easily installed using: pip install flask
 It combines a couple of projects Ive been working on.
 
